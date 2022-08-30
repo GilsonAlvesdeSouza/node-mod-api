@@ -13,5 +13,6 @@ router.get("/nome/:nome", ApiController.getNome);
 router.get("/phrases", PhraseController.index);
 router.get("/phrase/:id", PhraseController.getById);
 router.post("/phrase", PhraseController.store);
+router.put("/phrase/:id", PhraseController.update);
 
 export default router;

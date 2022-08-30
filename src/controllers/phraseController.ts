@@ -38,3 +38,21 @@ export const store = async (req: Request, res: Response) => {
     res.status(400).json({ error });
   }
 };
+
+export const update = async (req: Request, res: Response) => {
+  let { id } = req.params;
+  let phrase = await Phrase.findOne({ where: { id } });
+
+  let { author, description } = req.body;
+
+  if (phrase) {
+    if (author && description) {
+      phrase.author = author;
+      phrase.description = description;
+      await phrase.save();
+      res.status(200).json(phrase);
+    } else {
+      res.status(206).json({ msg: "verifique os campos obrigatórios" });
+    }
+  }
+};
