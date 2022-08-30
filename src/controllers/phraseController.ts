@@ -1,6 +1,5 @@
 import { error } from "console";
 import { Request, Response } from "express";
-import { where } from "sequelize/types";
 import { Phrase } from "../models/Phrase";
 
 export const index = async (req: Request, res: Response) => {
@@ -54,5 +53,17 @@ export const update = async (req: Request, res: Response) => {
     } else {
       res.status(206).json({ msg: "verifique os campos obrigatórios" });
     }
+  }
+};
+
+export const remove = async (req: Request, res: Response) => {
+  let { id } = req.params;
+
+  let isRemove = await Phrase.destroy({ where: { id } });
+
+  if (isRemove === 1) {
+    res.status(200).json({ msg: "removido com sucesso." });
+  } else {
+    res.status(400).json({ msg: "frase não encontrada" });
   }
 };

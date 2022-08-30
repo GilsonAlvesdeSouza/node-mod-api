@@ -14,5 +14,6 @@ router.get("/phrases", PhraseController.index);
 router.get("/phrase/:id", PhraseController.getById);
 router.post("/phrase", PhraseController.store);
 router.put("/phrase/:id", PhraseController.update);
+router.delete("/phrase/:id", PhraseController.remove);
 
 export default router;
