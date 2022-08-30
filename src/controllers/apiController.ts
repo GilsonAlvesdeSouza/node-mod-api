@@ -16,11 +16,3 @@ export const getNome = (req: Request, res: Response) => {
 
   res.json({ nome });
 };
-
-export const phrases = async (req: Request, res: Response) => {
-  let phrases = await Phrase.findAll();
-
-  console.log(phrases);
-
-  res.json({ phrases });
-};

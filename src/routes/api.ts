@@ -10,6 +10,8 @@ router.get("/aleatorio", ApiController.aleatorio);
 
 router.get("/nome/:nome", ApiController.getNome);
 
-router.post("/phrase", PhraseController.create);
+router.get("/phrases", PhraseController.index);
+router.get("/phrase/:id", PhraseController.getById);
+router.post("/phrase", PhraseController.store);
 
 export default router;
