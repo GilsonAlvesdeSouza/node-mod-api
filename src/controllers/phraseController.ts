@@ -1,5 +1,5 @@
-import { error } from "console";
 import { Request, Response } from "express";
+import { Sequelize } from "sequelize";
 import { Phrase } from "../models/Phrase";
 
 export const index = async (req: Request, res: Response) => {
@@ -62,8 +62,18 @@ export const remove = async (req: Request, res: Response) => {
   let isRemove = await Phrase.destroy({ where: { id } });
 
   if (isRemove === 1) {
-    res.status(200).json({ msg: "removido com sucesso." });
-  } else {
-    res.status(400).json({ msg: "frase não encontrada" });
+    return res.status(200).json({ msg: "removido com sucesso." });
   }
+  return res.status(400).json({ msg: "frase não encontrada" });
+};
+
+export const random = async (req: Request, res: Response) => {
+  let phrases = await Phrase.findOne({
+    order: [Sequelize.fn("RANDOM")],
+  });
+
+  if (phrases) {
+    return res.status(200).json(phrases);
+  }
+  res.status(400).json({ msg: "não há frases cadastradas." });
 };
